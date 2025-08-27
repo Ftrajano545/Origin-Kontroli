@@ -35,7 +35,7 @@ function loginForm() {
 
     if (usuario === usuarioCorreto && senha === senhaCorreta) {
         // alert("Login realizado com sucesso!");
-        window.location.href = "../adm/admfinal.html"
+        window.location.href = "/pages/admin/admin.html"
     } else {
         container.innerHTML = mensagem
     }

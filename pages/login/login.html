@@ -5,35 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Kontroli</title>
-    <link rel="stylesheet" href="loginfinal.css">
-    <script defer src="login.js"></script>
+    <link rel="stylesheet" href="/pages/login/login.css">
+    <script defer src="/pages/login/login.js"></script>
 
 </head>
 
 <body>
     <a href=""></a>
     <!-- Header -->
-<header class="header">
-    <div class="container">
-        
-        <!-- Logo -->
-        <div class="header-content logo">
-            <a href="/FINAL/indexfinal.html">
-                <img src="/img/logo_caixa.png" alt="" width="60px">
+    <header class="header">
+        <div class="container">
+
+            <!-- Logo -->
+            <div class="header-content logo">
+                <a href="/index.html">
+                    <img src="/img/logo_caixa.png" alt="" width="60px">
+                </a>
+                <span class="logo-text">Kontroli</span>
+            </div>
+
+            <!-- Botão voltar -->
+            <a href="/index.html" class="back-link">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Voltar ao site
             </a>
-            <span class="logo-text">Kontroli</span>
+
         </div>
-
-        <!-- Botão voltar -->
-        <a href="../site/site.html" class="back-link">
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-            Voltar ao site
-        </a>
-
-    </div>
-</header>
+    </header>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -46,43 +46,43 @@
                 </div>
 
                 <!-- <form id="loginForm" novalidate> -->
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email ou Usuário</label>
-                        <input type="text" id="email" name="email" class="form-input"
-                            placeholder="Digite seu email ou usuário" required>
-                        <div class="error-message" id="emailError">Este campo é obrigatório</div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email ou Usuário</label>
+                    <input type="text" id="email" name="email" class="form-input"
+                        placeholder="Digite seu email ou usuário" required>
+                    <div class="error-message" id="emailError">Este campo é obrigatório</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Senha</label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" class="form-input"
+                            placeholder="Digite sua senha" required>
+                        <button type="button" class="password-toggle" id="passwordToggle">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                id="eyeIcon">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
+                    <div class="error-message" id="passwordError">Este campo é obrigatório</div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="password" class="form-label">Senha</label>
-                        <div class="password-container">
-                            <input type="password" id="password" name="password" class="form-input"
-                                placeholder="Digite sua senha" required>
-                            <button type="button" class="password-toggle" id="passwordToggle">
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    id="eyeIcon">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="error-message" id="passwordError">Este campo é obrigatório</div>
-                    </div>
+                <div class="forgot-password">
+                    <a href="#" id="forgotPasswordLink">Esqueci minha senha</a>
+                </div>
 
-                    <div class="forgot-password">
-                        <a href="#" id="forgotPasswordLink">Esqueci minha senha</a>
-                    </div>
-
-                    <button class="login-button" id="loginButton" onclick="loginForm()">
-                        Entrar
-                    </button>
-                    <div id="erro">
+                <button class="login-button" id="loginButton" onclick="loginForm()">
+                    Entrar
+                </button>
+                <div id="erro">
 
 
-                    </div>
+                </div>
 
                 <!-- </form> -->
 

@@ -1,66 +1,66 @@
 // PRODUTOS
 let products = [
-    // {
-    //     id: '1',
-    //     name: 'Miojo',
-    //     code: 'MGP1',
-    //     category: 'Alimentação',
-    //     quantity: 15,
-    //     minStock: 5,
-    //     price: 2.00,
-    //     description: 'Miojo Galinha Gaipira Nissin Lamen',
-    //     createdAt: new Date('2025-08-15'),
-    //     updatedAt: new Date('2025-08-15')
-    // },
-    // {
-    //     id: '2',
-    //     name: 'Café Baggio',
-    //     code: 'CB01',
-    //     category: 'Alimentação',
-    //     quantity: 3,
-    //     minStock: 10,
-    //     price: 29.90,
-    //     description: 'Café Chocolate Trufado',
-    //     createdAt: new Date('2025-08-15'),
-    //     updatedAt: new Date('2025-08-15')
-    // },
-    // {
-    //     id: '3',
-    //     name: 'Coca Cola',
-    //     code: 'COCA01',
-    //     category: 'Alimentação',
-    //     quantity: 8,
-    //     minStock: 5,
-    //     price: 6.99,
-    //     description: 'Coca Cola Zero Açúcar',
-    //     createdAt: new Date('2025-08-15'),
-    //     updatedAt: new Date('2025-08-15')
-    // },
-    //     {
-    //     id: '4',
-    //     name: 'Vodka',
-    //     code: 'VODKA01',
-    //     category: 'Alcoólicos',
-    //     quantity: 4,
-    //     minStock: 12,
-    //     price: 66.99,
-    //     description: 'Vodka Grey Goose',
-    //     createdAt: new Date('2025-08-15'),
-    //     updatedAt: new Date('2025-08-15')
-    // }
-    // ,
-    //     {
-    //     id: '5',
-    //     name: 'Vodka2',
-    //     code: 'VODKA02',
-    //     category: 'Alcoólicos',
-    //     quantity: 4,
-    //     minStock: 12,
-    //     price: 66.99,
-    //     description: 'Vodka Grey Goose',
-    //     createdAt: new Date('2025-08-15'),
-    //     updatedAt: new Date('2025-08-15')
-    // }
+    {
+        id: '1',
+        name: 'Miojo',
+        code: 'MGP1',
+        category: 'Alimentação',
+        quantity: 15,
+        minStock: 5,
+        price: 2.00,
+        description: 'Miojo Galinha Gaipira Nissin Lamen',
+        createdAt: new Date('2025-08-15'),
+        updatedAt: new Date('2025-08-15')
+    },
+    {
+        id: '2',
+        name: 'Café Baggio',
+        code: 'CB01',
+        category: 'Alimentação',
+        quantity: 3,
+        minStock: 10,
+        price: 29.90,
+        description: 'Café Chocolate Trufado',
+        createdAt: new Date('2025-08-15'),
+        updatedAt: new Date('2025-08-15')
+    },
+    {
+        id: '3',
+        name: 'Coca Cola',
+        code: 'COCA01',
+        category: 'Alimentação',
+        quantity: 8,
+        minStock: 5,
+        price: 6.99,
+        description: 'Coca Cola Zero Açúcar',
+        createdAt: new Date('2025-08-15'),
+        updatedAt: new Date('2025-08-15')
+    },
+        {
+        id: '4',
+        name: 'Vodka',
+        code: 'VODKA01',
+        category: 'Alcoólicos',
+        quantity: 4,
+        minStock: 12,
+        price: 66.99,
+        description: 'Vodka Grey Goose',
+        createdAt: new Date('2025-08-15'),
+        updatedAt: new Date('2025-08-15')
+    }
+    ,
+        {
+        id: '5',
+        name: 'Vodka2',
+        code: 'VODKA02',
+        category: 'Alcoólicos',
+        quantity: 4,
+        minStock: 12,
+        price: 66.99,
+        description: 'Vodka Grey Goose',
+        createdAt: new Date('2025-08-15'),
+        updatedAt: new Date('2025-08-15')
+    }
 ];
 
 
