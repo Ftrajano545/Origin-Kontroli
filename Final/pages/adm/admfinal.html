@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontroli - Sistema de Estoque</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="admfinal.css">
+    <script defer src="admfinal.js"></script>
+    <script defer src="slider.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header com padrão azul -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+
+                        <a href="/FINAL/indexfinal.html">
+                            <img src="/img/logo_caixa.png" alt="" width="60px">
+
+                        </a>
+                        <!-- <a href="/FINAL/indexfinal.html"> <i class="fas fa-boxes logo-icon"></i></a> -->
+                        <span class="logo-text">Kontroli</span>
+                        <!-- <span class="badge">Sistema de Estoque</span> -->
+                    </div>
+                    <div class="header-actions">
+                        <button id="themeToggle" class="btn btn-ghost theme-toggle">
+                            <i class="fas fa-moon theme-toggle-icon" id="themeIcon"></i>
+                            <span id="themeText">Modo Escuro</span>
+                        </button>
+                        <div class="separator"></div>
+                       <a href="../site/site.html"> <button class="btn btn-ghost" >
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- Low Stock Alert -->
+            <div id="lowStockAlert" class="alert" style="display: none;">
+                <div class="alert-header">
+                    <i class="fas fa-bell"></i>
+                    <span class="alert-title">Alerta de Estoque</span>
+                </div>
+                <div class="alert-content" id="alertContent"></div>
+                <div class="alert-badges" id="alertBadges"></div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-info">
+                            <h3>Total de Produtos</h3>
+                            <div class="value" id="totalProducts">0</div>
+                        </div>
+                        <div class="stat-icon blue">
+                            <i class="fas fa-box"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-info">
+                            <h3>Itens em Estoque</h3>
+                            <div class="value" id="totalItems">0</div>
+                        </div>
+                        <div class="stat-icon green">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-info">
+                            <h3>Estoque Baixo</h3>
+                            <div class="value" id="lowStockCount">0</div>
+                        </div>
+                        <div class="stat-icon red">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-info">
+                            <h3>Valor Total</h3>
+                            <div class="value" id="totalValue">R$ 0,00</div>
+                        </div>
+                        <div class="stat-icon purple">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nome ou código...">
+                </div>
+                <div class="select-container">
+                    <select id="categoryFilter" class="select">
+                        <option value="all">Todas categorias</option>
+                    </select>
+                </div>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-download"></i>
+                    Exportar
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-chart-bar"></i>
+                    Relatórios
+                </button>
+                <button id="addProductBtn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Adicionar Produto
+                </button>
+            </div>
+
+            <!-- Products Table -->
+            <div id="productsContainer">
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Código</th>
+                                <th>Categoria</th>
+                                <th style="text-align: center;">Quantidade</th>
+                                <th style="text-align: center;">Est. Mín.</th>
+                                <th style="text-align: right;">Preço</th>
+                                <th style="text-align: center;">Status</th>
+                                <th style="width: 50px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Empty State (hidden by default) -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h3 class="empty-state-title">Nenhum produto encontrado</h3>
+                <p class="empty-state-description">
+                    Comece adicionando produtos ao seu estoque
+                </p>
+            </div>
+
+            <!-- Marketing Section -->
+            <div class="marketing">
+                <h2 class="marketing-title">
+                    Organize, visualize e gerencie seus produtos em poucos cliques
+                </h2>
+                <p class="marketing-description">
+                    Tenha tudo sob controle — de onde estiver
+                </p>
+                <div class="marketing-status">
+                    <div class="status-indicator">
+                        <div class="status-dot green"></div>
+                        <span>Sistema Ativo</span>
+                    </div>
+                    <div class="status-indicator">
+                        <div class="status-dot blue"></div>
+                        <span id="themeStatus">Modo Claro</span>
+                    </div>
+                </div>
+
+                <div class="slider">
+                    <div id="setaE" onclick="slider()">
+                        <img src="/img/setaE.png" alt="SETA" width="15%">
+                    </div>
+
+                    <div class="flex">
+                        <div class="test" id="test">
+                            <div class="card">
+                                <img src="https://cdn.awsli.com.br/600x700/1775/1775051/produto/134339988/19b01e2f38.jpg"
+                                    alt="Miojo Galinha Caipira" width="150px" id="imgiphone">
+                                <h4>Miojo Galinha Caipira</h4>
+                                <p>Nissin</p>
+                                <span> R$ 2,68</span> <br>
+                            </div>
+                            <div class="card">
+                                <img src="https://images-na.ssl-images-amazon.com/images/I/81EwLZToRbL._AC_SX425_.jpg"
+                                    alt="Cafe Baggio" width="150px" id="imgiphone">
+                                <h4>Café Chocoalte Trufado</h4>
+                                <p>Baggio</p>
+                                <span> R$ 23,99</span> <br>
+                            </div>
+                            <div class="card">
+                                <img src="https://superprix.vteximg.com.br/arquivos/ids/192077-600-600/541354.jpg?v=637394065614300000"
+                                    alt="Açúcar União" width="150px" id="imgiphone">
+                                <h4>Açúcar</h4>
+                                <p>União</p>
+                                <span> R$ 3,99</span> <br>
+                            </div>
+                        </div>
+                        <div class="test" id="test2">
+                            <div class="card">
+                                <img src="https://muffatosupermercados.vtexassets.com/arquivos/ids/368308/7894900010398.jpg?v=638309847238400000"
+                                    alt="Coca" width="150px" id="imgiphone">
+                                <h4>Refrigerante</h4>
+                                <p>Coca-cola</p>
+                                <span> R$ 1,89</span> <br>
+                            </div>
+                            <div class="card">
+                                <img src="https://m.media-amazon.com/images/I/815s35jNVkL.jpg" alt="Feijao width="
+                                    150px" id="imgiphone">
+                                <h4>Feijao</h4>
+                                <p>Kicaldo</p>
+                                <span> R$ 3,99</span> <br>
+                            </div>
+                            <div class="card">
+                                <img src="https://images.tcdn.com.br/img/img_prod/774261/vodka_grey_goose_original_750ml_930_1_169d499e79184a056f8099249d5b6e1f.png"
+                                    alt="Vodka" width="150px" id="imgiphone">
+                                <h4>Vodka</h4>
+                                <p>Grey Goose</p>
+                                <span> R$ 66,99</span> <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="setaD" onclick="slider()">
+                        <img src="/img/setaD.png" alt="SETA" width="15%">
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </main>
+
+
+
+
+
+
+
+
+
+
+        <!-- Product Modal -->
+        <div id="productModal" class="modal-overlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modalTitle">Adicionar Novo Produto</h2>
+                </div>
+                <form id="productForm">
+                    <div class="modal-content">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="productName">Nome do Produto *</label>
+                                <input type="text" id="productName" class="form-input" placeholder="Ex: Notebook Dell"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="productCode">Código *</label>
+                                <input type="text" id="productCode" class="form-input" placeholder="Ex: NB001" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="productCategory">Categoria *</label>
+                            <select id="productCategory" class="form-select" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="Eletrônicos">Eletrônicos</option>
+                                <option value="Periféricos">Periféricos</option>
+                                <option value="Móveis">Móveis</option>
+                                <option value="Roupas">Roupas</option>
+                                <option value="Livros">Livros</option>
+                                <option value="Alimentação">Alimentação</option>
+                                <option value="Alcoólicos">Alcoólicos</option>
+                            </select>
+                        </div>
+                        <div class="form-row-3">
+                            <div class="form-group">
+                                <label class="form-label" for="productQuantity">Quantidade *</label>
+                                <input type="number" id="productQuantity" class="form-input" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="productMinStock">Estoque Mínimo *</label>
+                                <input type="number" id="productMinStock" class="form-input" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="productPrice">Preço (R$) *</label>
+                                <input type="number" id="productPrice" class="form-input" step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="productDescription">Descrição</label>
+                            <textarea id="productDescription" class="form-textarea"
+                                placeholder="Descrição opcional do produto..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="cancelBtn" class="btn btn-secondary">Cancelar</button>
+                        <button onclick="produtos()" type="submit" id="saveBtn" class="btn btn-primary">Adicionar Produto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmModal" class="modal-overlay">
+            <div class="modal" style="max-width: 400px;">
+                <div class="modal-header">
+                    <h2 class="modal-title">Confirmar exclusão</h2>
+                </div>
+                <div class="modal-content">
+                    <p id="confirmMessage">Tem certeza que deseja excluir este produto? Esta ação não pode ser desfeita.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirmCancel" class="btn btn-secondary">Cancelar</button>
+                    <button type="button" id="confirmDelete" class="btn btn-danger">Excluir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <!-- <div id="toast" class="toast">
+            <div class="toast-message" id="toastMessage"></div>
+        </div> -->
+        
+    </div>
+
+
+</body>
+
+</html>
