@@ -15,14 +15,14 @@ async function produtos() {
         let status = ''
         let quantidade = cadaProd.quantity
         let minStock = cadaProd.minStock
-        
+
         quantidade < minStock ? status = alerta : status = "Em estoque"
 
 
         let html = `
             <tr>
                 <td>
-                    <p>${cadaProd.name}</p>
+                <p id="produto___${cadaProd.id}">${cadaProd.name}</p>
                     <p class="descricao">${cadaProd.description}</p>
                 </td>
                 <td>${cadaProd.code}</td>
@@ -76,7 +76,7 @@ async function deletaProduto(id) {
 
     window.location.reload()
 }
-    
+
 
 
 
@@ -102,10 +102,17 @@ function fecharEditModal() {
 
 async function getId(id) {
     document.querySelector("#getId").value = id
+
+    let nomeAnterior = document.querySelector('#produto___' + id).innerText
+    document.querySelector("#productNameEdit").value = nomeAnterior
 }
 
 async function updateProduct() {
     let id = document.querySelector("#getId").value
+
+
+
+
 
     let name = document.querySelector("#productNameEdit").value
     let code = document.querySelector("#productCodeEdit").value
@@ -123,11 +130,11 @@ async function updateProduct() {
         'description': description
     }
 
-    let response = await fetch(`${url}/${id}`,{
+    let response = await fetch(`${url}/${id}`, {
         method: 'PUT',
-        headers: {'Content-Type' : 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(novoProd)
     })
-        window.location.reload()
+    window.location.reload()
 
 }
