@@ -7,8 +7,8 @@
     <title>Kontroli - Sistema de Estoque</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/pages/admin/admin.css">
-    <script defer src="/pages/admin/admin.js"></script>
     <script defer src="/pages/admin/slider.js"></script>
+    <script defer src="/pages/admin/api.js"></script>
 </head>
 
 <body>
@@ -120,7 +120,7 @@
                     <i class="fas fa-chart-bar"></i>
                     Relatórios
                 </button>
-                <button id="addProductBtn" class="btn btn-primary">
+                <button id="addProductBtn" class="btn btn-primary" onclick="openModal()">
                     <i class="fas fa-plus"></i>
                     Adicionar Produto
                 </button>
@@ -135,14 +135,17 @@
                                 <th>Produto</th>
                                 <th>Código</th>
                                 <th>Categoria</th>
-                                <th style="text-align: center;">Quantidade</th>
-                                <th style="text-align: center;">Est. Mín.</th>
-                                <th style="text-align: right;">Preço</th>
-                                <th style="text-align: center;">Status</th>
-                                <th style="width: 50px;"></th>
+                                <th>Quantidade</th>
+                                <th>Est. Mín.</th>
+                                <th>Preço</th>
+                                <th>Status</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody id="productsTableBody">
+                            
+                                
+
                         </tbody>
                     </table>
                 </div>
@@ -178,12 +181,12 @@
                     </div>
                 </div>
 
-                <div class="slider">
+                <!-- <div class="slider">
                     <div id="setaE" onclick="slider()">
                         <img src="/img/setaE.png" alt="SETA" width="15%">
-                    </div>
+                    </div> -->
 
-                    <div class="flex">
+                <!-- <div class="flex">
                         <div class="test" id="test">
                             <div class="card">
                                 <img src="https://cdn.awsli.com.br/600x700/1775/1775051/produto/134339988/19b01e2f38.jpg"
@@ -216,8 +219,7 @@
                                 <span> R$ 1,89</span> <br>
                             </div>
                             <div class="card">
-                                <img src="https://m.media-amazon.com/images/I/815s35jNVkL.jpg" alt="Feijao width="
-                                    150px" id="imgiphone">
+                                <img src="https://m.media-amazon.com/images/I/815s35jNVkL.jpg" alt="Feijao" width=" 150px" id="imgiphone">
                                 <h4>Feijao</h4>
                                 <p>Kicaldo</p>
                                 <span> R$ 3,99</span> <br>
@@ -234,7 +236,7 @@
                     <div id="setaD" onclick="slider()">
                         <img src="/img/setaD.png" alt="SETA" width="15%">
                     </div>
-                </div>
+                </div> -->
 
 
 
@@ -257,7 +259,7 @@
                 <div class="modal-header">
                     <h2 class="modal-title" id="modalTitle">Adicionar Novo Produto</h2>
                 </div>
-                <form id="productForm">
+                <div id="productForm">
                     <div class="modal-content">
                         <div class="form-row">
                             <div class="form-group">
@@ -304,11 +306,12 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="cancelBtn" class="btn btn-secondary">Cancelar</button>
-                        <button onclick="produtos()" type="submit" id="saveBtn" class="btn btn-primary">Adicionar
+                        <button type="button" id="cancelBtn" class="btn btn-secondary"
+                            onclick="fecharModal()">Cancelar</button>
+                        <button onclick="adicionaProduto()" type="submit" id="saveBtn" class="btn btn-primary">Adicionar
                             Produto</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
 
@@ -335,7 +338,67 @@
         </div> -->
 
     </div>
-
+<div id="productEditModal" class="modal-overlay">
+            <div class="editModal">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modalTitle">Adicionar Novo Produto</h2>
+                </div>
+                <div id="productForm">
+                    <div class="modal-content">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="productName">Nome do Produto *</label>
+                                <input type="text" id="productNameEdit" class="form-input" placeholder="Ex: Notebook Dell"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="productCode">Código *</label>
+                                <input type="text" id="productCodeEdit" class="form-input" placeholder="Ex: NB001" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="productCategory">Categoria *</label>
+                            <select id="productCategoryEdit" class="form-select" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="Eletrônicos">Eletrônicos</option>
+                                <option value="Periféricos">Periféricos</option>
+                                <option value="Móveis">Móveis</option>
+                                <option value="Roupas">Roupas</option>
+                                <option value="Livros">Livros</option>
+                                <option value="Alimentação">Alimentação</option>
+                                <option value="Alcoólicos">Alcoólicos</option>
+                            </select>
+                        </div>
+                        <div class="form-row-3">
+                            <div class="form-group">
+                                <label class="form-label" for="productQuantity">Quantidade *</label>
+                                <input type="number" id="productQuantityEdit" class="form-input" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="productMinStock">Estoque Mínimo *</label>
+                                <input type="number" id="productMinStockEdit" class="form-input" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="productPrice">Preço (R$) *</label>
+                                <input type="number" id="productPriceEdit" class="form-input" step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="productDescription">Descrição</label>
+                            <textarea id="productDescriptionEdit" class="form-textarea"
+                                placeholder="Descrição opcional do produto..."></textarea>
+                        </div>
+                    </div>
+                    <input id="getId" type="hidden" >
+                    <div class="modal-footer">
+                        <button type="button" id="cancelBtn" class="btn btn-secondary"
+                            onclick="fecharEditModal()">Cancelar</button>
+                        <button onclick="updateProduct()" type="submit" id="saveBtn" class="btn btn-primary">Editar
+                            Produto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </body>
 

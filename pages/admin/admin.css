@@ -441,12 +441,11 @@ body {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    display: none;
+
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
     transition: var(--transition);
 }
 
@@ -454,8 +453,15 @@ body {
     opacity: 1;
     visibility: visible;
 }
+/* #productForm{
+    display: none;
+} */
+.descricao{
+    color: #82888e;
+    font-size: 12px;
+}
 
-.modal {
+.modal, .editModal {
     background: var(--surface);
     border-radius: var(--radius);
     max-width: 500px;
@@ -466,7 +472,7 @@ body {
     transition: var(--transition);
 }
 
-.modal-overlay.active .modal {
+.modal-overlay.active .modal, .editModal {
     transform: scale(1);
 }
 
@@ -482,6 +488,7 @@ body {
 
 .modal-content {
     padding: 1.5rem;
+
 }
 
 .form-group {
