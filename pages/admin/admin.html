@@ -59,7 +59,7 @@
                     <div class="stat-card-content">
                         <div class="stat-info">
                             <h3>Total de Produtos</h3>
-                            <div class="value" id="totalProducts">0</div>
+                            <div class="value" id="totalProducts"></div>
                         </div>
                         <div class="stat-icon blue">
                             <i class="fas fa-box"></i>
@@ -70,7 +70,7 @@
                     <div class="stat-card-content">
                         <div class="stat-info">
                             <h3>Itens em Estoque</h3>
-                            <div class="value" id="totalItems">0</div>
+                            <div class="value" id="totalItems"></div>
                         </div>
                         <div class="stat-icon green">
                             <i class="fas fa-shopping-cart"></i>
@@ -92,7 +92,7 @@
                     <div class="stat-card-content">
                         <div class="stat-info">
                             <h3>Valor Total</h3>
-                            <div class="value" id="totalValue">R$ 0,00</div>
+                            <div class="value" id="totalValue"></div>
                         </div>
                         <div class="stat-icon purple">
                             <i class="fas fa-dollar-sign"></i>
@@ -110,6 +110,7 @@
                 <div class="select-container">
                     <select id="categoryFilter" class="select">
                         <option value="all">Todas categorias</option>
+                        
                     </select>
                 </div>
                 <button class="btn btn-secondary">
@@ -143,6 +144,7 @@
                             </tr>
                         </thead>
                         <tbody id="productsTableBody">
+                            <!-- dados sendo inseridos via JS-->
                             
                                 
 
@@ -163,7 +165,7 @@
             </div>
 
             <!-- Marketing Section -->
-            <div class="marketing">
+            <!-- <div class="marketing">
                 <h2 class="marketing-title">
                     Organize, visualize e gerencie seus produtos em poucos cliques
                 </h2>
@@ -181,12 +183,12 @@
                     </div>
                 </div>
 
-                <!-- <div class="slider">
+                <div class="slider">
                     <div id="setaE" onclick="slider()">
                         <img src="/img/setaE.png" alt="SETA" width="15%">
-                    </div> -->
+                    </div>
 
-                <!-- <div class="flex">
+                <div class="flex">
                         <div class="test" id="test">
                             <div class="card">
                                 <img src="https://cdn.awsli.com.br/600x700/1775/1775051/produto/134339988/19b01e2f38.jpg"
@@ -236,12 +238,12 @@
                     <div id="setaD" onclick="slider()">
                         <img src="/img/setaD.png" alt="SETA" width="15%">
                     </div>
-                </div> -->
+                </div>
 
 
 
 
-            </div>
+            </div> -->
         </main>
 
 
@@ -341,7 +343,7 @@
 <div id="productEditModal" class="modal-overlay">
             <div class="editModal">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="modalTitle">Adicionar Novo Produto</h2>
+                    <h2 class="modal-title" id="modalTitle">Editar Produto</h2>
                 </div>
                 <div id="productForm">
                     <div class="modal-content">
@@ -360,13 +362,13 @@
                             <label class="form-label" for="productCategory">Categoria *</label>
                             <select id="productCategoryEdit" class="form-select" required>
                                 <option value="">Selecione uma categoria</option>
-                                <option value="Eletrônicos">Eletrônicos</option>
-                                <option value="Periféricos">Periféricos</option>
-                                <option value="Móveis">Móveis</option>
-                                <option value="Roupas">Roupas</option>
-                                <option value="Livros">Livros</option>
-                                <option value="Alimentação">Alimentação</option>
-                                <option value="Alcoólicos">Alcoólicos</option>
+                                <option value="Eletrônicos" id="categoryEletronicos">Eletrônicos</option>
+                                <option value="Periféricos" id="categoryPerifericos">Periféricos</option>
+                                <option value="Móveis" id="categoryMoveis">Móveis</option>
+                                <option value="Roupas" id="categoryRoupas">Roupas</option>
+                                <option value="Livros" id="categoryLivros">Livros</option>
+                                <option value="Alimentação" id="categoryAlimentacao">Alimentação</option>
+                                <option value="Alcoólicos" id="categoryAlcoolicos">Alcoólicos</option>
                             </select>
                         </div>
                         <div class="form-row-3">
@@ -389,7 +391,7 @@
                                 placeholder="Descrição opcional do produto..."></textarea>
                         </div>
                     </div>
-                    <input id="getId" type="hidden" >
+                    <input id="getId" type="hidden" > 
                     <div class="modal-footer">
                         <button type="button" id="cancelBtn" class="btn btn-secondary"
                             onclick="fecharEditModal()">Cancelar</button>
@@ -403,3 +405,5 @@
 </body>
 
 </html>
+
+
