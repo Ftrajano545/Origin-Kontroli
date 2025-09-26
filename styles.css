@@ -841,3 +841,33 @@ align-content: center;
 .block {
     display: block;
 }
+
+
+
+
+/* Estilo do botão do WhatsApp fixo */
+.whatsapp-button {
+    position: fixed;         /* Fixo na tela */
+    bottom: 20px;            /* Distância do fundo */
+    right: 20px;             /* Distância da direita */
+    z-index: 1000;           /* Fica acima de outros elementos */
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-button img {
+    width: 35px;
+    height: 35px;
+    pointer-events: none; /* Não interfere no clique */
+}
+
+.whatsapp-button:hover {
+    transform: scale(1.1);
+}

@@ -825,11 +825,3 @@ body {
     }
 }
 
-/* Theme Toggle Animation */
-.theme-toggle-icon {
-    transition: var(--transition);
-}
-
-.theme-toggle:hover .theme-toggle-icon {
-    transform: rotate(180deg);
-}

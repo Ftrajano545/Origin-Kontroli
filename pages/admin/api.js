@@ -64,8 +64,6 @@ async function produtos() {
 
 
 
-
-
     // APARECER OS PRODUTOS DA TELA COMO TABELA
     for (let i = 0; i < data.length; i++) {
         let cadaProd = data[i]
@@ -78,7 +76,16 @@ async function produtos() {
         let quantidade = cadaProd.quantity
         let minStock = cadaProd.minStock
 
-        quantidade < minStock ? status = alerta : status = "Em estoque"
+
+
+        let test = Number(cadaProd.price);
+        const valorFormatado = test.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+        })
+
+        quantidade < minStock ? status = alerta : status = `<p style="font-weight: bold; color: green;">Em estoque</p>`
 
         let html = `
             <tr>
@@ -90,7 +97,7 @@ async function produtos() {
                 <td>${cadaProd.category}</td>
                 <td>${cadaProd.quantity}</td>
                 <td>${cadaProd.minStock}</td>
-                <td>${cadaProd.price}</td>
+                <td id="precoProduto">${valorFormatado}</td>
                 <td>${status}</td>
                 <td>
                     <button onclick="openEditModal('${cadaProd.id}')">Editar</button>
@@ -231,6 +238,7 @@ async function updateProduct() {
 
 
 // SEARCH BAR
+async function search(){
 inputPesquisa.addEventListener("input", (evento) => {
     const textoBusca = evento.target.value.toLowerCase();
 
@@ -243,4 +251,6 @@ inputPesquisa.addEventListener("input", (evento) => {
             item.style.display = "none"; // Esconde o item
         }
     });
-});
+})
+
+}
